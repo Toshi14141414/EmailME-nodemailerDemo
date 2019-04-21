@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="style.css" rel="stylesheet" type="text/css">
+
+    <title>EmailME</title>
+</head>
+
+<body>
+        
+    <form>
+        <li>
+            <input type="text" id="subject" placeholder="Subject" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Subject';}"> <br>
+        </li>
+        <li>
+            <input type="email" id="email" placeholder="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}"> <br>
+        </li>
+        <li>
+            <textarea name="text" id="text" cols="100" rows="10"></textarea> <br>
+        </li>
+        <div>
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+
+    <footer>
+        Links:
+        <a href="https://github.com/Toshi14141414">GitHub</a>
+        <a href="https://www.linkedin.com/in/hanyu-xu/">LinkedIn</a>
+    </footer>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $('form').on('submit', (e) => {
+            e.preventDefault();
+
+            const email = $('#email').val().trim();
+            const subject = $('#subject').val().trim();
+            const text = $('#text').val().trim();
+
+            const data = {
+                email,
+                subject,
+                text
+            };
+
+            $.post('/email', data, function() {
+                console.log('Server received our data');
+            });
+
+        });;
+    </script>
+</body>
+
+</html>
